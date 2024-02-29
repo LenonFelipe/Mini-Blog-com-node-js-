@@ -1,7 +1,10 @@
 const express = require("express");
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 const app = express();
-const port = 5001;
+const {categorias} = require("./models/categoria");
+
+//ENV com dados do mongo
+require("dotenv").config();
 
 //Conexão com MongoDB
 const Schema = mongoose.Schema;
@@ -13,10 +16,4 @@ mongoose.connect(process.env.MONGO_DB,{
     console.log("Erro ao conectar" + error);
 });
 
-app.get("/", (req, res) => {
-    res.send("Servidor rodando na porta: "+ port);
-});
-
-app.listen(port, () => {
-    console.log("Servidor reodando na porta: " + port);
-});
+const PORT = process.env.PORT || 5005
